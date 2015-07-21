@@ -8,9 +8,9 @@ from google.appengine.ext import ndb
 from google.appengine.ext import blobstore
 
 
-from models.models import Announcement
-from models.models import User
-from models.models import File
+from code.models import Announcement
+from code.models import User
+from code.models import File
 
 from random import randint
 
@@ -48,7 +48,7 @@ def userExists(username):
 
 
 def emailExists(email):
-    q = User.query(User.name == email)
+    q = User.query(User.email == email)
     if q>0:
         return True
     return False
@@ -60,12 +60,8 @@ class RegisterUser(webapp2.RequestHandler):
         email = self.request.get('email')
         password = self.request.get('pass')
 
-        a = userExists(username)
-        b = emailExists(email)
-
         if userExists(username) or emailExists(email):
-            #username or email already in use
-            self.redirect('/register_failed')
+            self.response.write('UserOrEmailExists')
         else:
             user = User()
             user.name = username
@@ -74,12 +70,7 @@ class RegisterUser(webapp2.RequestHandler):
             user.id = randint(100000,999999)
             user.group_id = 0
             key = user.put()
-            self.response.write(a,b)
-            self.redirect('/new_user_home')
-
-
-
-
+            self.response.write('RegistrationSuccesful:'+key)
 
 
 

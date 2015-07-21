@@ -22,3 +22,7 @@ class File(ndb.Model):
     size = ndb.IntegerProperty()
     file_key = ndb.BlobKeyProperty()
     date = ndb.DateTimeProperty(auto_now_add=True)
+
+class Group(ndb.Model):
+    id = ndb.IntegerProperty()
+    date = ndb.DateTimeProperty(auto_now_add=True)
