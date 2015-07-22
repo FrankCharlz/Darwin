@@ -4,7 +4,7 @@ indexes:
   ancestor: no
 
 - kind: Announcement
-    ancestor: no
+  ancestor: no
 
 - kind: File
   ancestor: no
